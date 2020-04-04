@@ -9,7 +9,13 @@ namespace game
         private Size size;
         private Region region;
 
-        public Player(Form1 form)
+        public Player(string name)
+        {
+            GetName = name;
+            Score = 0;
+        }
+
+        public void SetUpPlayer(Form1 form)
         {
             size = form.GetBitmap().Size;
             point.X = 0;
@@ -28,7 +34,7 @@ namespace game
 
         public int Life { get; set; } = 100;
 
-        public Pen LaserPen { get; }
+        public Pen LaserPen { get; set; }
 
         public Point GetPoint
         {
@@ -51,5 +57,9 @@ namespace game
             form.Graphics.DrawImage(form.GetBitmap(), point);
             form.Graphics.ExcludeClip(region);
         }
+
+        public string GetName { get; }
+
+        public int Score { get; set; }
     }
 }

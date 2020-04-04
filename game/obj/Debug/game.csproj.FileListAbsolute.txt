@@ -28,3 +28,5 @@ D:\game\game\obj\Debug\game.Properties.Resources.resources
 D:\game\game\obj\Debug\game.csproj.GenerateResource.cache
 D:\game\game\obj\Debug\game.exe
 D:\game\game\obj\Debug\game.pdb
+D:\Курсовая2020\game\game\obj\Debug\game.StartForm.resources
+D:\Курсовая2020\game\game\obj\Debug\game.ForgotPassword.resources

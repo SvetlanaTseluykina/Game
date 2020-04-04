@@ -32,6 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnMiddle = new System.Windows.Forms.Button();
             this.btnHard = new System.Windows.Forms.Button();
+            this.BtnBack = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnEasy
@@ -47,7 +48,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(277, 101);
+            this.label1.Location = new System.Drawing.Point(278, 99);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(135, 19);
             this.label1.TabIndex = 1;
@@ -73,19 +74,32 @@
             this.btnHard.UseVisualStyleBackColor = true;
             this.btnHard.Click += new System.EventHandler(this.BtnHard_Click);
             // 
+            // BtnBack
+            // 
+            this.BtnBack.Location = new System.Drawing.Point(577, 12);
+            this.BtnBack.Name = "BtnBack";
+            this.BtnBack.Size = new System.Drawing.Size(131, 49);
+            this.BtnBack.TabIndex = 4;
+            this.BtnBack.Text = "BACK TO START";
+            this.BtnBack.UseVisualStyleBackColor = true;
+            this.BtnBack.Click += new System.EventHandler(this.BtnBack_Click);
+            // 
             // PlayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackgroundImage = global::game.Properties.Resources.cosmos;
             this.ClientSize = new System.Drawing.Size(720, 480);
+            this.ControlBox = false;
+            this.Controls.Add(this.BtnBack);
             this.Controls.Add(this.btnHard);
             this.Controls.Add(this.btnMiddle);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnEasy);
             this.DoubleBuffered = true;
             this.Name = "PlayForm";
-            this.Text = "START";
+            this.Text = "LEVEL";
             this.Load += new System.EventHandler(this.PlayForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -98,5 +112,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnMiddle;
         private System.Windows.Forms.Button btnHard;
+        private System.Windows.Forms.Button BtnBack;
     }
 }

@@ -19,19 +19,26 @@ namespace game
         private PlayForm playForm;
         private int count = 0;
         private const int COUNT_MAX = 3;
+        private int timer1Tick;
+        private int timer3Tick;
+        private const int TIMER2_TICK = 5000;
 
         public Form1()
         {
             InitializeComponent();
         }
 
-        public Form1(int nMAX, int timer1Tick, int timer3Tick, PlayForm playForm)
+        public Form1(int nMAX, int timer1Tick, int timer3Tick, PlayForm playForm, Player player)
         {
             InitializeComponent();
             this.nMAX = nMAX;
-            timer1.Interval = timer1Tick;
+            this.timer1Tick = timer1Tick;
+            timer1.Interval = this.timer1Tick;
             this.playForm = playForm;
-            timer3.Interval = timer3Tick;
+            this.timer3Tick = timer3Tick;
+            timer3.Interval = this.timer3Tick;
+            timer2.Interval = TIMER2_TICK;
+            this.player = player;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -45,7 +52,10 @@ namespace game
 
         private void BtnStart_Click(object sender, EventArgs e)
         {
-            player = new Player(this);
+            timer1.Interval = timer1Tick;
+            timer2.Interval = TIMER2_TICK;
+            timer3.Interval = timer3Tick;
+            player.SetUpPlayer(this);
             player.ShowPlayer(this, this.Width / 2, this.Height - 150);
             textBox2.Text = player.Life.ToString();
             ufo.EnemyBatch(this, "Ufo");
@@ -84,25 +94,30 @@ namespace game
             timer2.Stop();
             timer3.Stop();
             int percent = result * 100 / (ufo.DeltaN * ufo.NGeneration + asteroid.DeltaN * asteroid.NGeneration);
-            string msg = "Killed " + result.ToString() + " enemies, your result is " + percent.ToString() + "%";
+            string msg = "Killed " + result.ToString() + " enemies, your result in this game is " + percent.ToString() + "%";
             if (player.Life <= 0 || percent < 51)
             {
                 MessageBox.Show("You lose! " + msg, "Your result", MessageBoxButtons.OK);
             }
             else
             {
-                MessageBox.Show("Congrats! You win! " + msg, "Your result", MessageBoxButtons.OK);
+                player.Score += result;
+                MessageBox.Show("Congrats! You win! " + msg +
+                " Total result is " + player.Score, "Your result", MessageBoxButtons.OK);
             }
             player.ShowPlayer(this, this.Width / 2, this.Height - 150);
             ufo.SetN(0);
             asteroid.SetN(0);
             btnStart.Enabled = true;
             btnExit.Enabled = true;
+            btnLaser.Text = "turn on laser";
             btnLaser.Enabled = false;
             btnStop.Enabled = false;
             result = 0;
             textBox1.Text = " ";
             textBox2.Text = " ";
+            ufo = new Enemy(new Ufo[nMAX], nMAX);
+            asteroid = new Enemy(new Asteroid[nMAX], nMAX);
             SetLaser(false);
             ClearBackground();
         }

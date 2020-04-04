@@ -15,10 +15,14 @@ namespace game
         int nMax;
         int timer1Tick;
         int timer2Tick;
+        Player player;
+        StartForm startForm;
 
-        public PlayForm()
+        public PlayForm(Player player, StartForm startForm)
         {
             InitializeComponent();
+            this.player = player;
+            this.startForm = startForm;
         }
 
         private void PlayForm_Load(object sender, EventArgs e)
@@ -29,7 +33,7 @@ namespace game
         private void SetGame (int nMax, int timerTick)
         {
             timer2Tick = timer1Tick - 20;
-            Form1 form = new Form1(nMax, timerTick, timer2Tick, this);
+            Form1 form = new Form1(nMax, timerTick, timer2Tick, this, player);
             form.Show();
             this.Visible = false;
         }
@@ -53,6 +57,12 @@ namespace game
             nMax = 50;
             timer1Tick = 200;
             SetGame(nMax, timer1Tick);
+        }
+
+        private void BtnBack_Click(object sender, EventArgs e)
+        {
+            startForm.Show();
+            this.Close();
         }
     }
 }
